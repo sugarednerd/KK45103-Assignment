@@ -9,7 +9,7 @@ class DiscoverController extends Controller
 {
     public function getPackagesListing()
     {
-        $packagesListing = Package::all();
+        $packagesListing = Package::paginate(2); // Paginate with 10 items per page
         $locations = Package::distinct('location')->pluck('location')->toArray();
 
         return view('discover', compact('packagesListing', 'locations'));
@@ -39,7 +39,7 @@ class DiscoverController extends Controller
             $queryBuilder->where('location', $location);
         }
 
-        $packagesListing = $queryBuilder->get();
+        $packagesListing = $queryBuilder->paginate(10); // Paginate with 10 items per page
         $locations = Package::distinct('location')->pluck('location')->toArray();
 
         return view('discover', compact('packagesListing', 'locations'));
