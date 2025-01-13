@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\DiscoverController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Package;
@@ -12,6 +11,9 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // Define the constant for the repeated validation rule
+    private const REQUIRED_STRING = 'required|string';
+
     public function index()
     {
         return view('admin.dashboard.index');
@@ -52,12 +54,12 @@ class DashboardController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'title' => self::REQUIRED_STRING,
+            'description' => self::REQUIRED_STRING,
             'price' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
-            'location' => 'required|string',
+            'location' => self::REQUIRED_STRING,
             'cover_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
             'featured' => 'boolean',
             // Add validation for other fields as needed
@@ -78,7 +80,6 @@ class DashboardController extends Controller
         $package = Package::create($validatedData);
     }
 
-
     public function editPackage($id)
     {
         $package = Package::findOrFail($id);
@@ -90,12 +91,12 @@ class DashboardController extends Controller
     public function updatePackage(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'title' => self::REQUIRED_STRING,
+            'description' => self::REQUIRED_STRING,
             'price' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
-            'location' => 'required|string',
+            'location' => self::REQUIRED_STRING,
             'cover_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
             'featured' => 'boolean',
         ]);
@@ -150,7 +151,6 @@ class DashboardController extends Controller
     {
         $featuredPackages = Package::where('featured', true)->get();
         return view('welcome', compact('featuredPackages'));
-
     }
     // Other admin-related methods...
 }
