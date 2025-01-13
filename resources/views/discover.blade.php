@@ -74,6 +74,9 @@
     </div>
     @endforeach
   </div>
+  <div class="mt-4">
+    {{ $packagesListing->links() }} <!-- Pagination links -->
+  </div>
   @else
   <div class="alert alert-info mt-4" role="alert">
     <strong>No package listings available yet. Please wait for admin updates.</strong>
