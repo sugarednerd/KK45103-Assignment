@@ -34,7 +34,7 @@ jobs:
           npm install -g sonarqube-scanner
           sonar-scanner \
             -Dsonar.organization=kk45103-group-project \
-            -Dsonar.projectKey=kk45103-group-project \
+            -Dsonar.projectKey=sugarednerd_KK45103-Assignment \
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=$SONAR_TOKEN
