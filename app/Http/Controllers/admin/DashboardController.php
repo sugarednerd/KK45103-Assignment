@@ -64,21 +64,29 @@ class DashboardController extends Controller
             'featured' => 'boolean',
             // Add validation for other fields as needed
         ]);
-
+    
         // Handle file upload for the cover image
-        $coverImage = $request->file('cover_image');
-        $coverImageName = time() . '_' . $coverImage->getClientOriginalName();
-        $coverImage->move(public_path('cover'), $coverImageName);
-
-        // Add the cover image name to the validated data
-        $validatedData['cover_image'] = $coverImageName;
-
+        if ($request->hasFile('cover_image')) {
+            $coverImage = $request->file('cover_image');
+            $coverImageName = time() . '_' . $coverImage->getClientOriginalName();
+            $coverImage->move(public_path('cover'), $coverImageName);
+    
+            // Add the cover image name to the validated data
+            $validatedData['cover_image'] = $coverImageName;
+        }
+    
         // Add user_id to the validated data
         $validatedData['user_id'] = Auth::id();
-
+    
         // Create a new package
         $package = Package::create($validatedData);
+    
+        // Redirect to the admin dashboard index with success message
+        return redirect()
+            ->route('admin.dashboard.index')
+            ->with('success', 'Package created successfully!');
     }
+    
 
     public function editPackage($id)
     {

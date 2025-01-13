@@ -30,8 +30,13 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-  <!-- Scripts -->
-  @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+  <!-- Scripts
+  @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
+
+    <!-- Scripts -->
+  @if (!env('VITE_DISABLED', false))
+      @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+  @endif
 
 </head>
 
