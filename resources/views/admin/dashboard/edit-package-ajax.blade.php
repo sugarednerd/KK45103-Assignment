@@ -20,6 +20,7 @@
             @method('PUT')
 
             <h5 class="card-title mb-3 fw-bold">
+              Title
               <input type="text" name="title" value="{{ $package->title }}" class="form-control" required>
             </h5>
 

@@ -1,5 +1,4 @@
 <div class="container">
-  <h1 class="display-4"></h1>
   <h1><i class="bi bi-calendar me-2 mt-5"></i> All Bookings</h1>
   <hr>
   @if($bookings->count() > 0)
